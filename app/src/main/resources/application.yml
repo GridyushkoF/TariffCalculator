@@ -4,4 +4,12 @@ currency:
 cost:
   rub:
     perKg: 400
+    perM3: 200
     minimal: 350
+departure-destination-ranges:
+  minLatitude: 45
+  maxLatitude: 65
+  minLongitude: 30
+  maxLongitude: 96
+
+

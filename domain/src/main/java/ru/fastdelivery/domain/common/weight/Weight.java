@@ -1,5 +1,8 @@
 package ru.fastdelivery.domain.common.weight;
 
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -9,10 +12,12 @@ import java.math.RoundingMode;
  *
  * @param weightGrams вес в граммах
  */
+@Slf4j
 public record Weight(BigInteger weightGrams) implements Comparable<Weight> {
 
     public Weight {
         if (isLessThanZero(weightGrams)) {
+            log.warn("USER_ERROR: Weight cannot be below Zero!");
             throw new IllegalArgumentException("Weight cannot be below Zero!");
         }
     }
