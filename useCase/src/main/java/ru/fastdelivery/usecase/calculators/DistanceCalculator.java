@@ -8,6 +8,7 @@ public class DistanceCalculator {
     private static final double SEMI_MINOR_AXIS_MT = 6356752.314245;
     private static final double FLATTENING = 1 / 298.257223563;
     private static final double ERROR_TOLERANCE = 1e-12;
+
     //CALC WORKS BY VINCENTY FORMULA!
     public double calcDistance(Departure departure, Destination destination) {
         double latitude1 = departure.latitude().doubleValue();

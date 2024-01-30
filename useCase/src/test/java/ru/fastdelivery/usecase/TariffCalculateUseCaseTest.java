@@ -52,13 +52,13 @@ class TariffCalculateUseCaseTest {
         when(weightPriceProvider.costPerKg()).thenReturn(pricePerKg);
         when(weightPriceProvider.costPerM3()).thenReturn(pricePerM3);
 
-        var dimensions = new Dimensions(1000,1000,1000);
-        var shipment = new Shipment(List.of(new Pack(new Weight(BigInteger.valueOf(1)),dimensions)),
+        var dimensions = new Dimensions(1000, 1000, 1000);
+        var shipment = new Shipment(List.of(new Pack(new Weight(BigInteger.valueOf(1)), dimensions)),
                 new CurrencyFactory(code -> true).create("RUB"), departureTestValue, destinationTestValue);
-        var distance = distanceCalculator.calcDistance(shipment.departure(),shipment.destination());
+        var distance = distanceCalculator.calcDistance(shipment.departure(), shipment.destination());
         var expectedPrice = new Price(BigDecimal.valueOf(numberRounder.roundNumber(200 * (distance / 450))), currency);
 
-        var actualPrice = tariffCalculateUseCase.calc(shipment);
+        var actualPrice = tariffCalculateUseCase.calculateTotalPrice(shipment);
 
         assertThat(actualPrice).usingRecursiveComparison()
                 .withComparatorForType(BigDecimalComparator.BIG_DECIMAL_COMPARATOR, BigDecimal.class)
@@ -76,22 +76,23 @@ class TariffCalculateUseCaseTest {
 
         assertThat(actual).isEqualTo(minimalPrice);
     }
+
     @Test
     @DisplayName("Получение общего объёма -> успешно")
     void whenCalcPriceByVolume_thenSuccess() {
-        var pricePerM3 = new Price(new BigDecimal(200),currency);
+        var pricePerM3 = new Price(new BigDecimal(200), currency);
 
         when(weightPriceProvider.costPerM3()).thenReturn(pricePerM3);
         var packList = List.of(
                 new Pack(
                         new Weight(BigInteger.valueOf(100)),
-                        new Dimensions(1000,1000,1000)
+                        new Dimensions(1000, 1000, 1000)
                 )
         );
 
-        var shipment = new Shipment(packList,currency, departureTestValue, destinationTestValue);
-        var actual = tariffCalculateUseCase.calcPriceByVolume(shipment);
-        var expected = new Price(BigDecimal.valueOf(200),currency);
+        var shipment = new Shipment(packList, currency, departureTestValue, destinationTestValue);
+        var actual = tariffCalculateUseCase.calculatePriceByVolume(shipment);
+        var expected = new Price(BigDecimal.valueOf(200), currency);
         assertThat(actual).usingRecursiveComparison()
                 .withComparatorForType(BigDecimalComparator.BIG_DECIMAL_COMPARATOR, BigDecimal.class)
                 .isEqualTo(expected);

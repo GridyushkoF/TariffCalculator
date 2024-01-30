@@ -5,10 +5,10 @@ import ru.fastdelivery.domain.common.coords.departure.Departure;
 import ru.fastdelivery.domain.common.coords.destination.Destination;
 import ru.fastdelivery.usecase.calculators.DistanceCalculator;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.within;
-
-import java.math.BigDecimal;
 
 public class DistanceCalculatorTest {
     final DistanceCalculator distanceCalculator = new DistanceCalculator();

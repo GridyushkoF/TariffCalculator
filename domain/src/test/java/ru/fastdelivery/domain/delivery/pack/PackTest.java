@@ -15,15 +15,16 @@ class PackTest {
     @Test
     void whenWeightMoreThanMaxWeight_thenThrowException() {
         var weight = new Weight(BigInteger.valueOf(150_001));
-        assertThatThrownBy(() -> new Pack(weight,new Dimensions(100,100,100)))
+        assertThatThrownBy(() -> new Pack(weight, new Dimensions(100, 100, 100)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void whenWeightLessThanMaxWeight_thenObjectCreated() {
-        var actual = new Pack(new Weight(BigInteger.valueOf(1_000)),new Dimensions(100,100,100));
+        var actual = new Pack(new Weight(BigInteger.valueOf(1_000)), new Dimensions(100, 100, 100));
         assertThat(actual.weight()).isEqualTo(new Weight(BigInteger.valueOf(1_000)));
     }
+
     @Test
     @DisplayName("Нормализация габаритов -> успешно")
     void whenNormalizeDimensions_thenSuccess() {

@@ -25,6 +25,7 @@ public record Shipment(
                 .map(Pack::weight)
                 .reduce(Weight.zero(), Weight::add);
     }
+
     public BigDecimal volumeAllPackages() {
         var volumeAllPackagesM3 = 0.0D;
         for (var pack : packages) {
@@ -37,8 +38,9 @@ public record Shipment(
         }
         return BigDecimal.valueOf(ceilVolume(volumeAllPackagesM3));
     }
+
     public Double ceilVolume(Double volume) {
-        if(String.valueOf(volume.longValue()).length() >= 6) {
+        if (String.valueOf(volume.longValue()).length() >= 6) {
             var decimalFormat = new DecimalFormat("#.####");
             return Double.valueOf(decimalFormat.format(volume));
         }

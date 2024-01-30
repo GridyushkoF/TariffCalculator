@@ -23,30 +23,32 @@ class ShipmentTest {
             BigDecimal.valueOf(34.0522),
             BigDecimal.valueOf(-118.2437)
     );
+
     @Test
     void whenSummarizingWeightOfAllPackages_thenReturnSum() {
         var weight1 = new Weight(BigInteger.TEN);
         var weight2 = new Weight(BigInteger.ONE);
 
-        var packages = List.of(new Pack(weight1,null), new Pack(weight2,null));
+        var packages = List.of(new Pack(weight1, null), new Pack(weight2, null));
         var shipment = new Shipment(packages,
-                new CurrencyFactory(code -> true).create("RUB"),departureTestValue,destinationTestValue);
+                new CurrencyFactory(code -> true).create("RUB"), departureTestValue, destinationTestValue);
 
         var massOfShipment = shipment.weightAllPackages();
 
         assertThat(massOfShipment.weightGrams()).isEqualByComparingTo(BigInteger.valueOf(11));
     }
+
     @Test
     void whenSummarizingVolumeOfAllPackages_thenReturnSum() {
         var weight = new Weight(BigInteger.valueOf(100));
-        var dimensions1 = new Dimensions(100,200,300);
-        var dimensions2 = new Dimensions(120,230,340);
+        var dimensions1 = new Dimensions(100, 200, 300);
+        var dimensions2 = new Dimensions(120, 230, 340);
         List<Pack> packList = List.of(
-                new Pack(weight,dimensions1),
-                new Pack(weight,dimensions2)
+                new Pack(weight, dimensions1),
+                new Pack(weight, dimensions2)
         );
 
-        var shipment = new Shipment(packList,new CurrencyFactory(code -> true).create("RUB"),departureTestValue,destinationTestValue);
+        var shipment = new Shipment(packList, new CurrencyFactory(code -> true).create("RUB"), departureTestValue, destinationTestValue);
         assertThat(shipment.volumeAllPackages().doubleValue()).isEqualTo(0.012);
 
 

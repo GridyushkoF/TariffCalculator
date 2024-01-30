@@ -1,10 +1,10 @@
 package ru.fastdelivery.presentation.api.response;
 
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import ru.fastdelivery.domain.common.price.Price;
 
 import java.math.BigDecimal;
+
 @Slf4j
 public record CalculatePackagesResponse(
         BigDecimal totalPrice,

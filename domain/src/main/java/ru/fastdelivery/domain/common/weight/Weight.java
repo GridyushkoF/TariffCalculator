@@ -1,6 +1,5 @@
 package ru.fastdelivery.domain.common.weight;
 
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -47,7 +46,6 @@ public record Weight(BigInteger weightGrams) implements Comparable<Weight> {
         Weight weight = (Weight) o;
         return weightGrams.compareTo(weight.weightGrams) == 0;
     }
-
 
     @Override
     public int compareTo(Weight w) {

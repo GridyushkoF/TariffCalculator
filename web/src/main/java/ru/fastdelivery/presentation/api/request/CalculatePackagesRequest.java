@@ -28,34 +28,34 @@ public record CalculatePackagesRequest(
         Destination destination
 
 ) {
-        public CalculatePackagesRequest {
-                if(packages != null) {
-                        for (CargoPackage cargoPackage : packages) {
-                                var length = cargoPackage.length().longValue();
-                                var width = cargoPackage.width().longValue();
-                                var height = cargoPackage.height().longValue();
-                                if(length <= 0 || width <= 0 || height <= 0) {
-                                        String warnText = "One of size values equals or lower than 0!: " + length + ", " + width + ", " + height;
-                                        log.warn(warnText);
-                                        throw new IllegalArgumentException(warnText);
-                                }
-                                if(length >= 1500 || width >= 1500 || height >= 1500) {
-                                        String warnText = "One of size values equals or higher than 1500!: " + length + ", " + width + ", " + height;
-                                        log.warn(warnText);
-                                        throw new IllegalArgumentException(warnText);
-                                }
-                        }
+    public CalculatePackagesRequest {
+        if (packages != null) {
+            for (CargoPackage cargoPackage : packages) {
+                var length = cargoPackage.length().longValue();
+                var width = cargoPackage.width().longValue();
+                var height = cargoPackage.height().longValue();
+                if (length <= 0 || width <= 0 || height <= 0) {
+                    String warnText = "One of size values equals or lower than 0!: " + length + ", " + width + ", " + height;
+                    log.warn(warnText);
+                    throw new IllegalArgumentException(warnText);
                 }
-                if(departure == null) {
-                        String warnText = "departure can`t be null";
-                        log.warn(warnText);
-                        throw new IllegalArgumentException(warnText);
+                if (length >= 1500 || width >= 1500 || height >= 1500) {
+                    String warnText = "One of size values equals or higher than 1500!: " + length + ", " + width + ", " + height;
+                    log.warn(warnText);
+                    throw new IllegalArgumentException(warnText);
                 }
-                if(destination == null) {
-                        String warnText = "destination can`t be null";
-                        log.warn(warnText);
-                        throw new IllegalArgumentException(warnText);
-                }
-
+            }
         }
+        if (departure == null) {
+            String warnText = "departure can`t be null";
+            log.warn(warnText);
+            throw new IllegalArgumentException(warnText);
+        }
+        if (destination == null) {
+            String warnText = "destination can`t be null";
+            log.warn(warnText);
+            throw new IllegalArgumentException(warnText);
+        }
+
+    }
 }

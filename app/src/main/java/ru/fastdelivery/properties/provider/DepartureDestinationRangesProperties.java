@@ -15,22 +15,22 @@ public class DepartureDestinationRangesProperties implements DepartureDestinatio
     private BigDecimal maxLongitude;
 
     @Override
-    public BigDecimal minLatitude() {
+    public BigDecimal getMinLatitude() {
         return minLatitude;
     }
 
     @Override
-    public BigDecimal maxLatitude() {
+    public BigDecimal getMaxLatitude() {
         return maxLatitude;
     }
 
     @Override
-    public BigDecimal minLongitude() {
+    public BigDecimal getMinLongitude() {
         return minLongitude;
     }
 
     @Override
-    public BigDecimal maxLongitude() {
+    public BigDecimal getMaxLongitude() {
         return maxLongitude;
     }
 }

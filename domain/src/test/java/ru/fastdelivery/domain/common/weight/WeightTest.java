@@ -39,9 +39,9 @@ class WeightTest {
     }
 
     @ParameterizedTest
-    @CsvSource({ "1000, 1, -1",
+    @CsvSource({"1000, 1, -1",
             "199, 199, 0",
-            "50, 999, 1" })
+            "50, 999, 1"})
     void compareToTest(BigInteger low, BigInteger high, int expected) {
         var weightLow = new Weight(low);
         var weightHigh = new Weight(high);

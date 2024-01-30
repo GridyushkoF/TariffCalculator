@@ -3,11 +3,11 @@ package ru.fastdelivery.usecase;
 import java.math.BigDecimal;
 
 public interface DepartureDestinationRangesProvider {
-    BigDecimal minLatitude();
+    BigDecimal getMinLatitude();
 
-    BigDecimal maxLatitude();
+    BigDecimal getMaxLatitude();
 
-    BigDecimal minLongitude();
+    BigDecimal getMinLongitude();
 
-    BigDecimal maxLongitude();
+    BigDecimal getMaxLongitude();
 }

@@ -15,7 +15,7 @@ public record Price(
         Currency currency) {
     public Price {
         if (isLessThanZero(amount)) {
-//            log.warn("USER_ERROR: Price Amount cannot be below Zero!: " + amount);
+            log.warn("USER_ERROR: Price Amount cannot be below Zero!: " + amount);
             throw new IllegalArgumentException("Price Amount cannot be below Zero!");
         }
     }

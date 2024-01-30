@@ -9,9 +9,7 @@ import ru.fastdelivery.properties.provider.PricesRublesProperties;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class PricesRublesPropertiesTest {
 
@@ -22,7 +20,7 @@ class PricesRublesPropertiesTest {
     PricesRublesProperties properties;
 
     @BeforeEach
-    void init(){
+    void init() {
         properties = new PricesRublesProperties();
         properties.setCurrencyFactory(currencyFactory);
 

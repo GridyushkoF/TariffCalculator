@@ -27,13 +27,6 @@ import static org.mockito.Mockito.when;
 class CalculateControllerTest extends ControllerTest {
 
     final String baseCalculateApi = "/api/v1/calculate/";
-    @MockBean
-    TariffCalculateUseCase useCase;
-    @MockBean
-    CurrencyFactory currencyFactory;
-    @MockBean
-    RangesValidatorUseCase validatorUseCase;
-
     final Departure departureTestValue = new Departure(
             BigDecimal.valueOf(40.714268),
             BigDecimal.valueOf(-74.005974)
@@ -42,14 +35,20 @@ class CalculateControllerTest extends ControllerTest {
             BigDecimal.valueOf(34.0522),
             BigDecimal.valueOf(-118.2437)
     );
+    @MockBean
+    TariffCalculateUseCase useCase;
+    @MockBean
+    CurrencyFactory currencyFactory;
+    @MockBean
+    RangesValidatorUseCase validatorUseCase;
 
     @Test
     @DisplayName("Валидные данные для расчета стоимость -> Ответ 200")
     void whenValidInputData_thenReturn200() {
         var request = new CalculatePackagesRequest(
-                List.of(new CargoPackage(BigInteger.TEN,BigInteger.valueOf(345),BigInteger.valueOf(453),BigInteger.valueOf(1000))), "RUB",departureTestValue,destinationTestValue);
+                List.of(new CargoPackage(BigInteger.TEN, BigInteger.valueOf(345), BigInteger.valueOf(453), BigInteger.valueOf(1000))), "RUB", departureTestValue, destinationTestValue);
         var rub = new CurrencyFactory(code -> true).create("RUB");
-        when(useCase.calc(any())).thenReturn(new Price(BigDecimal.valueOf(10), rub));
+        when(useCase.calculateTotalPrice(any())).thenReturn(new Price(BigDecimal.valueOf(10), rub));
         when(useCase.minimalPrice()).thenReturn(new Price(BigDecimal.valueOf(5), rub));
 
         ResponseEntity<CalculatePackagesResponse> response =
@@ -61,7 +60,7 @@ class CalculateControllerTest extends ControllerTest {
     @Test
     @DisplayName("Список упаковок == null -> Ответ 400")
     void whenEmptyListPackages_thenReturn400() {
-        var request = new CalculatePackagesRequest(null, "RUB",departureTestValue,destinationTestValue);
+        var request = new CalculatePackagesRequest(null, "RUB", departureTestValue, destinationTestValue);
 
         ResponseEntity<String> response = restTemplate.postForEntity(baseCalculateApi, request, String.class);
 
